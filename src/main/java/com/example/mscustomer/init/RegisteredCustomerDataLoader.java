@@ -21,7 +21,9 @@ public class RegisteredCustomerDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(registeredCustomerRepository.findAll() == null) {
+
+        String username = "johndoe"; // Example username
+        if (!registeredCustomerRepository.existsByUsername(username)) {
             ContactDetails contact = ContactDetails.builder()
                     .email("john.doe@example.com")
                     .phone("1234567890")
