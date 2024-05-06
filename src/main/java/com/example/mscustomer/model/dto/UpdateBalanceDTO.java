@@ -12,5 +12,6 @@ public class UpdateBalanceDTO {
     private String operation;
     private String cardNumber;
     private String cardHolderName;
+    private String expirationDate;
     private String cvv;
 }
