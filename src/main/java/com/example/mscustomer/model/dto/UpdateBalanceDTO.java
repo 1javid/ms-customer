@@ -11,4 +11,6 @@ public class UpdateBalanceDTO {
     private Float newBalance;
     private String operation;
     private String cardNumber;
+    private String cardHolderName;
+    private String cvv;
 }
