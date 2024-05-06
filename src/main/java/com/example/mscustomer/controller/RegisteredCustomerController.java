@@ -17,7 +17,7 @@ public class RegisteredCustomerController {
 
     @PostMapping("/{customerId}/updateBalance")
     public ResponseEntity<Void> updateCustomerBalance(@PathVariable Long customerId, @RequestBody UpdateBalanceDTO updateBalanceDTO) {
-        registeredCustomerService.updateCustomerBalance(customerId, updateBalanceDTO.getNewBalance(), updateBalanceDTO.getOperation());
+        registeredCustomerService.updateCustomerBalanceWithCard(customerId, updateBalanceDTO.getNewBalance(), updateBalanceDTO.getCardNumber(), updateBalanceDTO.getOperation());
         return ResponseEntity.ok().build();
     }
 

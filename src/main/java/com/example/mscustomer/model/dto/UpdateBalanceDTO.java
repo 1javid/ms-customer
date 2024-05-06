@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class UpdateBalanceDTO {
     private Float newBalance;
     private String operation;
+    private String cardNumber;
 }

@@ -1,7 +1,9 @@
 package com.example.mscustomer.init;
 
+import com.example.mscustomer.model.entities.Card;
 import com.example.mscustomer.model.entities.ContactDetails;
 import com.example.mscustomer.model.entities.RegisteredCustomer;
+import com.example.mscustomer.repository.CardRepository;
 import com.example.mscustomer.repository.ContactDetailsRepository;
 import com.example.mscustomer.repository.RegisteredCustomerRepository;
 import com.example.mscustomer.service.impl.RegisteredCustomerServiceImpl;
@@ -12,11 +14,14 @@ import org.springframework.stereotype.Component;
 public class RegisteredCustomerDataLoader implements CommandLineRunner {
     private final RegisteredCustomerRepository registeredCustomerRepository;
     private final ContactDetailsRepository contactDetailsRepository;
+    private final CardRepository cardRepository;
 
     public RegisteredCustomerDataLoader(RegisteredCustomerRepository registeredCustomerRepository,
-                                        ContactDetailsRepository contactDetailsRepository) {
+                                        ContactDetailsRepository contactDetailsRepository,
+                                        CardRepository cardRepository) {
         this.registeredCustomerRepository = registeredCustomerRepository;
         this.contactDetailsRepository = contactDetailsRepository;
+        this.cardRepository = cardRepository;
     }
 
     @Override
@@ -40,7 +45,18 @@ public class RegisteredCustomerDataLoader implements CommandLineRunner {
                     .accountBalance(1000f)
                     .contactDetails(contact)
                     .build();
-            registeredCustomerRepository.save(customer);
+            customer = registeredCustomerRepository.save(customer);
+
+            Card card = Card.builder()
+                    .customer(customer)
+                    .cardNumber("4098362213562563")
+                    .cardHolderName("John Doe")
+                    .expirationDate("03/2025")
+                    .cvv("325")
+                    .isValid(true)
+                    .build();
+
+            cardRepository.save(card);
         }
     }
 }
