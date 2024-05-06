@@ -21,6 +21,12 @@ public class RegisteredCustomerController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/{customerId}/flightPayment")
+    public ResponseEntity<Void> flightPaymentBalance(@PathVariable Long customerId, @RequestBody UpdateBalanceDTO updateBalanceDTO) {
+        registeredCustomerService.updateCustomerBalance(customerId, updateBalanceDTO.getNewBalance(), updateBalanceDTO.getOperation());
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<RegisteredCustomer> getCustomerById(@PathVariable Long id) {
         var customer = registeredCustomerService.getById(id);
